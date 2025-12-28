@@ -55,101 +55,52 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 
 ### Detailed Pipeline Steps
 **1. Kafka Streaming Layer**
+* An Amazon EC2 instance is created to host the Kafka broker and it is accessed using ssh through local machines's command prompt.
+* A Kafka Producer fetches live crypto data from the CoinCap API and the producer publishes messages to a Kafka topic.
+* A Kafka Consumer subscribes to the topic and continuously reads messages.
+* Incoming messages are saved as raw JSON files in Amazon S3.
+* This simulates a real-time ingestion system commonly used in production pipelines.
 
-A Kafka Producer fetches live crypto data from the CoinCap API.
+**2. Raw Data Storage (S3 – Raw Zone)**
+* Raw data is stored exactly as received (JSON format).
+* No transformations are applied at this stage.
+* This ensures data traceability and allows reprocessing if needed.
 
-The producer publishes messages to a Kafka topic.
-
-A Kafka Consumer subscribes to the topic and continuously reads messages.
-
-Incoming messages are saved as raw JSON files in Amazon S3.
-
-This simulates a real-time ingestion system commonly used in production pipelines.
-
-2️⃣ Raw Data Storage (S3 – Raw Zone)
-
-Raw data is stored exactly as received (JSON format).
-
-No transformations are applied at this stage.
-
-This ensures data traceability and allows reprocessing if needed.
-
-Example:
-
-s3://kafka-crypto-mitul/raw/
-
-3️⃣ ETL Processing with AWS Glue (PySpark)
-
+**3. ETL Processing with AWS Glue (PySpark)**
 An AWS Glue job performs the following:
+* Reads raw JSON files from S3
+* Applies an explicit schema using PySpark
+* Handles type casting and null values
+* Flattens nested structures (using explode() where needed)
+* Converts JSON data into columnar Parquet format
+* Writes cleaned data into the curated S3 path
 
-Reads raw JSON files from S3
+**Why Parquet?**
+* Faster query performance
+* Lower storage cost
+* Optimized for analytics
 
-Applies an explicit schema using PySpark
+**4. Metadata Creation with Glue Crawler**
+* Glue Crawlers scan the curated S3 folder
+* Automatically infer schema and partitions
+* Create tables in AWS Glue Data Catalog
+* Makes data discoverable by Athena
 
-Handles type casting and null values
+**5. Analytics with Amazon Athena**
+* Athena queries the curated Parquet data directly from S3
+* No database or servers to manage
+* SQL queries return analytics-ready results
 
-Flattens nested structures (using explode() where needed)
-
-Converts JSON data into columnar Parquet format
-
-Writes cleaned data into the curated S3 path
-
-Why Parquet?
-
-Faster query performance
-
-Lower storage cost
-
-Optimized for analytics
-
-Example curated path:
-
-s3://kafka-crypto-mitul/curated/
-
-4️⃣ Metadata Creation with Glue Crawler
-
-Glue Crawlers scan the curated S3 folder
-
-Automatically infer schema and partitions
-
-Create tables in AWS Glue Data Catalog
-
-Makes data discoverable by Athena
-
-5️⃣ Analytics with Amazon Athena
-
-Athena queries the curated Parquet data directly from S3
-
-No database or servers to manage
-
-SQL queries return analytics-ready results
-
-Example query:
-
-SELECT symbol, price_usd, change_percent_24hr
-FROM realtime_crypto_kafka.kafka_crypto_mitul
-ORDER BY price_usd DESC
-LIMIT 10;
-
-🎯 Key Data Engineering Concepts Demonstrated
-
-Real-time streaming with Kafka
-
-Event-driven ingestion
-
-Data lake architecture (raw vs curated zones)
-
-ETL using PySpark
-
-Schema enforcement and evolution
-
-JSON to Parquet conversion
-
-Partition-aware querying
-
-Serverless analytics with Athena
-
-Cloud-native data engineering on AWS
+### Key Data Engineering Concepts Demonstrated
+* Real-time streaming with Kafka
+* Event-driven ingestion
+* Data lake architecture (raw vs curated zones)
+* ETL using PySpark
+* Schema enforcement and evolution
+* JSON to Parquet conversion
+* Partition-aware querying
+* Serverless analytics with Athena
+* Cloud-native data engineering on AWS
 
 🧠 What This Project Shows Interviewers
 
@@ -177,7 +128,6 @@ Add dashboards using Amazon QuickSight
 
 Implement partitioning by date/hour
 
-📌 Conclusion
-
-This project replicates a real-world data engineering workflow using industry-standard tools.
-It demonstrates how streaming data can be ingested, transformed, stored efficiently, and queried at scale in a cloud-native environment.
+### Conclusion
+This project replicates a **real-world data engineering workflow** using industry-standard tools.
+It demonstrates how **streaming data** can be ingested, transformed, stored efficiently, and queried at scale in a **cloud-native environment**.

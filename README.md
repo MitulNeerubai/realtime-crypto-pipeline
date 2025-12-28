@@ -102,32 +102,6 @@ An AWS Glue job performs the following:
 * Serverless analytics with Athena
 * Cloud-native data engineering on AWS
 
-🧠 What This Project Shows Interviewers
-
-You understand how real data pipelines are built
-
-You know when to use Kafka vs batch processing
-
-You can write PySpark ETL jobs
-
-You understand S3 + Glue + Athena architecture
-
-You know why Parquet is used
-
-You can explain raw → curated → analytics layers
-
-🚀 Future Improvements (Optional)
-
-Add Kafka Connect for S3 sink
-
-Add data quality checks in Glue
-
-Automate Glue jobs using Airflow
-
-Add dashboards using Amazon QuickSight
-
-Implement partitioning by date/hour
-
 ### Conclusion
 This project replicates a **real-world data engineering workflow** using industry-standard tools.
 It demonstrates how **streaming data** can be ingested, transformed, stored efficiently, and queried at scale in a **cloud-native environment**.

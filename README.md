@@ -3,53 +3,41 @@
  
 ### Project Overview
 
-This project demonstrates a complete end-to-end data engineering pipeline for ingesting, processing, and analyzing real-time cryptocurrency market data using modern cloud and big data tools.
+This project demonstrates a complete **end-to-end data engineering pipeline** for ingesting, processing, and analyzing **real-time cryptocurrency market data** using modern cloud and big data tools.
 
-The pipeline simulates a real-world production setup where live data is streamed using Apache Kafka, stored in Amazon S3, transformed using AWS Glue with PySpark, and queried using Amazon Athena for analytics.
+The pipeline simulates a real-world production setup where **live data** is streamed using **Apache Kafka**, stored in **Amazon S3**, transformed using **AWS Glue with PySpark**, and queried using **Amazon Athena** for analytics.
 
-The goal of this project is to showcase core data engineering concepts, hands-on cloud skills, and practical ETL workflows that are commonly used in industry.
+The goal of this project is to showcase **core data engineering concepts**, hands-on cloud skills, and practical **ETL workflows** that are commonly used in industry.
 
 
 ### Architecture Overview
 
-High-level flow:
+#### High-level flow:
 
-Data Source
-Cryptocurrency market data is fetched from the CoinCap API.
+#### 1. Data Source
+* Cryptocurrency market data is fetched from the CoinCap API.
 
-Streaming Ingestion (Apache Kafka)
+#### 2. Streaming Ingestion (Apache Kafka)
+* Kafka Producer publishes live crypto data to Kafka topics
+* Kafka Consumer reads streaming data in real time
 
-Kafka Producer publishes live crypto data to Kafka topics
+#### 3. Raw Storage (Amazon S3 – Raw Zone)
+* Kafka consumer writes raw JSON data into Amazon S3
+* This represents the raw / landing layer of the data lake
 
-Kafka Consumer reads streaming data in real time
+#### 4. ETL Processing (AWS Glue – PySpark)
+* AWS Glue reads raw JSON files from S3
+* Applies schema enforcement, data cleaning, and transformations
+* Converts JSON into Parquet format
+* Writes processed data to a curated S3 path
 
-Raw Storage (Amazon S3 – Raw Zone)
+#### 5. Metadata Management (AWS Glue Crawler)
+* Crawlers scan curated data
+* Create tables in AWS Glue Data Catalog
 
-Kafka consumer writes raw JSON data into Amazon S3
-
-This represents the raw / landing layer of the data lake
-
-ETL Processing (AWS Glue – PySpark)
-
-AWS Glue reads raw JSON files from S3
-
-Applies schema enforcement, data cleaning, and transformations
-
-Converts JSON into Parquet format
-
-Writes processed data to a curated S3 path
-
-Metadata Management (AWS Glue Crawler)
-
-Crawlers scan curated data
-
-Create tables in AWS Glue Data Catalog
-
-Analytics & Querying (Amazon Athena)
-
-Athena queries curated Parquet data directly from S3
-
-Enables fast, serverless SQL analytics
+#### 6. Analytics & Querying (Amazon Athena)
+* Athena queries curated Parquet data directly from S3
+* Enables fast, serverless SQL analytics
 
 🛠️ Technologies Used
 

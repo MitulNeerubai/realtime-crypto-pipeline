@@ -54,7 +54,7 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 * Amazon Athena – Serverless SQL querying
 
 ### Detailed Pipeline Steps
-**1. Kafka Streaming Layer
+**1. Kafka Streaming Layer**
 
 A Kafka Producer fetches live crypto data from the CoinCap API.
 

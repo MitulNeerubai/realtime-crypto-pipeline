@@ -18,8 +18,12 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 * Cryptocurrency market data is fetched from the CoinCap API.
 
 #### 2. Streaming Ingestion (Apache Kafka)
-* Kafka Producer publishes live crypto data to Kafka topics
-* Kafka Consumer reads streaming data in real time
+* An Amazon EC2 instance is created to host the Kafka broker.
+* The EC2 instance is accessed using SSH from the local machine.
+* Apache Kafka is installed and configured on the EC2 instance.
+* Kafka services are started manually on the EC2 host.
+* A Kafka Producer publishes live cryptocurrency data to Kafka topics.
+* A Kafka Consumer subscribes to these topics and reads the streaming data in real time.
 
 #### 3. Raw Storage (Amazon S3 – Raw Zone)
 * Kafka consumer writes raw JSON data into Amazon S3
@@ -39,48 +43,18 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 * Athena queries curated Parquet data directly from S3
 * Enables fast, serverless SQL analytics
 
-🛠️ Technologies Used
+### Technologies Used
+* Apache Kafka – Real-time data streaming
+* Python – API ingestion and Kafka producers/consumers
+* Amazon EC2 – Kafka broker hosting
+* Amazon S3 – Data lake storage (raw & curated zones)
+* AWS Glue – ETL processing using PySpark
+* PySpark – Data transformations and schema handling
+* AWS Glue Data Catalog – Metadata management
+* Amazon Athena – Serverless SQL querying
 
-Apache Kafka – Real-time data streaming
-
-Python – API ingestion and Kafka producers/consumers
-
-Amazon EC2 – Kafka broker hosting
-
-Amazon S3 – Data lake storage (raw & curated zones)
-
-AWS Glue – ETL processing using PySpark
-
-PySpark – Data transformations and schema handling
-
-AWS Glue Data Catalog – Metadata management
-
-Amazon Athena – Serverless SQL querying
-
-GitHub – Version control and project documentation
-
-📂 Project Structure
-realtime-crypto-pipeline/
-│
-├── kafka/
-│   ├── producer.py              # Kafka producer (CoinCap API → Kafka)
-│   ├── consumer.py              # Kafka consumer (Kafka → S3)
-│
-├── S3/
-│   ├── raw/                     # Raw JSON data written from Kafka
-│   ├── curated/                 # Cleaned Parquet data from Glue ETL
-│
-├── ETL_job_raw-to-clean/
-│   ├── glue_etl_script.py       # PySpark ETL job (JSON → Parquet)
-│
-├── pipeline-working-->Athena-query/
-│   ├── athena_queries.sql       # Example Athena queries
-│
-├── coincap_master_data.csv      # Sample dataset / reference
-├── README.md                    # Project documentation
-
-🔄 Detailed Pipeline Steps
-1️⃣ Kafka Streaming Layer
+### Detailed Pipeline Steps
+**1. Kafka Streaming Layer
 
 A Kafka Producer fetches live crypto data from the CoinCap API.
 

@@ -105,3 +105,10 @@ An AWS Glue job performs the following:
 ### Conclusion
 This project replicates a **real-world data engineering workflow** using industry-standard tools.
 It demonstrates how **streaming data** can be ingested, transformed, stored efficiently, and queried at scale in a **cloud-native environment**.
+
+
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/86d7e4da-a156-4f7b-8927-931cd34af0cc" />
+
+
+
+

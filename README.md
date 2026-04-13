@@ -5,7 +5,7 @@
 
 This project demonstrates a complete **end-to-end data engineering pipeline** for ingesting, processing, and analyzing **real-time cryptocurrency market data** using modern cloud and big data tools.
 
-The pipeline simulates a real-world production setup where **live data** is streamed using **Apache Kafka**, stored in **Amazon S3**, transformed using **AWS Glue with PySpark**, and queried using **Amazon Athena and snowflake** for data warehousing and analytics.
+The pipeline simulates a real-world production setup where **live data** is streamed using **Apache Kafka**, stored in **Amazon S3**, transformed using **AWS Glue with PySpark**, and queried using **Amazon Athena and Snowflake** for data warehousing and analytics.
 
 The goal of this project is to showcase **core data engineering concepts**, hands-on cloud skills, and practical **ETL workflows** that are commonly used in industry.
 

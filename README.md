@@ -43,6 +43,11 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 * Athena queries curated Parquet data directly from S3
 * Enables fast, serverless SQL analytics
 
+#### 7. Data Warehouse & Analytics (Snowflake)
+* Loaded 10,314 rows of curated crypto data into Snowflake
+* Created CRYPTO_DB database with RAW_DATA schema
+* Performed SQL analytics
+  
 ### Technologies Used
 * Apache Kafka – Real-time data streaming
 * Python – API ingestion and Kafka producers/consumers
@@ -52,6 +57,7 @@ The goal of this project is to showcase **core data engineering concepts**, hand
 * PySpark – Data transformations and schema handling
 * AWS Glue Data Catalog – Metadata management
 * Amazon Athena – Serverless SQL querying
+* Snowflake – Cloud data warehousing and SQL analytics
 
 ### Detailed Pipeline Steps
 **1. Kafka Streaming Layer**
@@ -91,6 +97,14 @@ An AWS Glue job performs the following:
 * No database or servers to manage
 * SQL queries return analytics-ready results
 
+#### 6. Data Warehouse & Analytics (Snowflake)
+* Loaded 10,314 rows of curated crypto data into Snowflake
+* Created CRYPTO_DB database with RAW_DATA schema
+* Performed SQL analytics — top assets by market cap, 
+  price movers, and total market overview
+* Replaced file-based querying with a scalable, 
+  production-grade cloud data warehouse
+
 ### Key Data Engineering Concepts Demonstrated
 * Real-time streaming with Kafka
 * Event-driven ingestion
@@ -101,14 +115,11 @@ An AWS Glue job performs the following:
 * Partition-aware querying
 * Serverless analytics with Athena
 * Cloud-native data engineering on AWS
+* Snowflake – Cloud data warehousing and SQL analytics
 
 ### Conclusion
 This project replicates a **real-world data engineering workflow** using industry-standard tools.
 It demonstrates how **streaming data** can be ingested, transformed, stored efficiently, and queried at scale in a **cloud-native environment**.
-
-
-<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/86d7e4da-a156-4f7b-8927-931cd34af0cc" />
-
 
 
 
